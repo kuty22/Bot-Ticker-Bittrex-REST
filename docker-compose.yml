@@ -1,0 +1,31 @@
+version: "3"
+services:
+  automate_db:
+    build:
+      context: data/
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: test
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: Scroller_db
+    volumes:
+      - ./data-volume:/var/lib/mysql
+    networks:
+      - platform
+  automate:
+    build: ./
+    environment:
+      MYSQL_USER: test
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: Scroller_db
+      MYSQL_HOST: automate_db
+      NB_WORKER: 4
+      BASE_CURRENCY: USDT
+    expose:
+      - 80
+    networks:
+      - platform
+networks:
+  platform:
+    external:
+      name: websocket-scroller

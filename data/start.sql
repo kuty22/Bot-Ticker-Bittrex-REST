@@ -1,0 +1,17 @@
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'
+    IDENTIFIED BY 'pass'
+    WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+USE Scroller_db;
+
+-- Ticker schema --
+CREATE TABLE ticker(
+	id INT(11) NOT NULL AUTO_INCREMENT KEY,
+  marketName VARCHAR(20),
+	baseCurrency VARCHAR(20),
+	date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	bid INT(11) NOT NULL,
+	ask INT(11) NOT NULL,
+	last INT(11) NOT NULL
+);
